@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="mahaz_document_list" model="ir.ui.view">
+    <field name="name">mahaz.document.list</field>
+    <field name="model">ir.attachment</field>
+    <field name="priority">90</field>
+    <field name="arch" type="xml">
+      <list string="Task Documents">
+        <field name="name"/>
+        <field name="type"/>
+        <field name="mimetype"/>
+        <field name="file_size"/>
+        <field name="create_uid"/>
+        <field name="create_date"/>
+      </list>
+    </field>
+  </record>
+  <record id="mahaz_document_form" model="ir.ui.view">
+    <field name="name">mahaz.document.form</field>
+    <field name="model">ir.attachment</field>
+    <field name="priority">90</field>
+    <field name="arch" type="xml">
+      <form string="Task Document">
+        <sheet>
+          <group>
+            <field name="name" required="1"/>
+            <field name="type"/>
+            <field name="datas" filename="name" invisible="type != 'binary'" required="type == 'binary'"/>
+            <field name="url" widget="url" invisible="type != 'url'" required="type == 'url'"/>
+            <field name="description"/>
+            <field name="res_model" invisible="1"/>
+            <field name="res_id" invisible="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

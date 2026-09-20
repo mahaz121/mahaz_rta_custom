@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="mahaz_task_purchase_request_form" model="ir.ui.view">
+    <field name="name">mahaz_task_purchase_request_form</field>
+    <field name="model">project.task</field>
+    <field name="inherit_id" ref="mahaz_project_task_integration.mahaz_task_form"/>
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <xpath expr="//button[@name='mahaz_action_view_purchases']" position="after">
+        <field name="mahaz_can_read_purchase_request" invisible="1"/>
+      <button name="mahaz_action_view_purchase_requests" type="object" class="oe_stat_button" icon="fa-list-alt"
+              invisible="not id or not mahaz_can_read_purchase_request">
+        <field name="mahaz_purchase_request_count" widget="statinfo" string="Purchase Requests"/>
+      </button>
+      </xpath>
+      <xpath expr="//header" position="inside">
+        <field name="mahaz_can_create_purchase_request" invisible="1" groups="base.group_user"/>
+        <button name="mahaz_action_create_purchase_request" type="object" string="Create Purchase Request"
+                invisible="not id or not mahaz_can_create_purchase_request" groups="base.group_user"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

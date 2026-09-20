@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="mahaz_account_move_form" model="ir.ui.view">
+    <field name="name">mahaz_account_move_form</field>
+    <field name="model">account.move</field>
+    <field name="inherit_id" ref="account.view_move_form"/>
+    <field name="priority">16</field>
+    <field name="arch" type="xml">
+      <xpath expr="/form/sheet" position="inside">
+        <group name="mahaz_task_integration" string="Task Integration" invisible="move_type == 'entry'">
+          <field name="mahaz_task_id" options="{'no_create': True}"/>
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>

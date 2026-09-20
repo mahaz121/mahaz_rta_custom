@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="mahaz_task_ticket_form" model="ir.ui.view">
+    <field name="name">mahaz_task_ticket_form</field>
+    <field name="model">project.task</field>
+    <field name="inherit_id" ref="mahaz_project_task_integration.mahaz_task_form"/>
+    <field name="priority">30</field>
+    <field name="arch" type="xml">
+      <xpath expr="//button[@name='mahaz_action_view_invoices']" position="before">
+        <field name="mahaz_can_read_ticket" invisible="1"/>
+      <button name="mahaz_action_view_tickets" type="object" class="oe_stat_button" icon="fa-life-ring"
+              invisible="not id or not mahaz_can_read_ticket">
+        <field name="mahaz_ticket_count" widget="statinfo" string="Tickets"/>
+      </button>
+      </xpath>
+    </field>
+  </record>
+</odoo>

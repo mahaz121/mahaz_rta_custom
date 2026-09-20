@@ -1,0 +1,10 @@
+{'name': 'Mahaz Project Purchase Requests',
+ 'version': '18.0.1.0.0',
+ 'author': 'Mahaz',
+ 'license': 'AGPL-3',
+ 'category': 'Services/Project',
+ 'depends': ['mahaz_project_task_integration', 'purchase_request'],
+ 'data': ['views/project_task_views.xml', 'views/purchase_request_views.xml'],
+ 'installable': True,
+ 'application': False,
+ 'auto_install': False}

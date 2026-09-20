@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+
+# Local tools, tests and generated files
+tools/
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+.validation/
+dist/
+SOURCE.md
+TEST_CHECKLIST.md
+VALIDATION.md
