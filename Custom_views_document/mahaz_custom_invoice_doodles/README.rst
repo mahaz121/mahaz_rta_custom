@@ -3,7 +3,7 @@ Mahaz Invoice Doodles
 
 Maintainer: Mahaz <mahaz_abdullah@hotmail.com> | https://mahaz.uk
 
-Version 18.0.1.2.1 provides a modern navy-and-sand invoice layout, bundled Cairo
+Version 18.0.1.3.0 provides a modern navy-and-sand invoice layout, bundled Cairo
 Arabic/Latin fonts, decorative line art, and an optional saved drawing panel.
 The standard invoice and optional GCC report use the layout. The companion
 ``mahaz_custom_invoice_doodles_gcc`` preserves the localization's invoice data,
@@ -14,6 +14,27 @@ by wkhtmltopdf's separate header margin. It appears once per invoice. Standard
 invoice downloads, PDF without Payment, and Fresh Print use the same dedicated
 paper format. Other report actions and the company-wide paper format are not
 modified. Long invoices repeat the line-table heading and PDF footer.
+
+Logos and compact layout
+------------------------
+
+Raster logos are converted to RGB PNG for Qt, flattened on white, trimmed of
+empty margins, and fitted without distortion onto a consistent canvas. The
+original company logo is not modified. Unsupported formats (including SVG)
+fall back to the original image and log a warning. For such a logo, an
+administrator can upload a PNG under Settings > Companies > the company >
+Mahaz Invoice Branding. This override applies only to that company's invoices.
+
+Header/customer/date boxes are removed. Reduced padding and natural totals
+pagination keep short invoices compact without shrinking fonts or hiding rows.
+One-page output depends on descriptions, address length, notes, payments, and
+drawings; large invoices continue onto additional pages. Local wkhtmltopdf
+fixtures with one and eight ordinary lines fit one page; 40 lines use two.
+These fixtures are not the user's Sana invoice or an Odoo database render.
+
+Run the standalone logo tests with::
+
+    python mahaz_custom_invoice_doodles/checks/test_logo.py
 
 Deployment
 ----------

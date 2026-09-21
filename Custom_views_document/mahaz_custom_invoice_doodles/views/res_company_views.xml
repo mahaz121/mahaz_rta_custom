@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mahaz_company_invoice_logo_form" model="ir.ui.view">
+        <field name="name">res.company.form.mahaz.invoice.logo</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="mahaz_invoice_branding" string="Mahaz Invoice Branding" groups="base.group_system">
+                    <group>
+                        <field name="mahaz_invoice_logo" widget="image" options="{'size': [240, 120]}"/>
+                    </group>
+                    <p class="text-muted">Optional invoice-only logo. Use a PNG with little empty space around the artwork. Leave empty to use the company logo.</p>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
