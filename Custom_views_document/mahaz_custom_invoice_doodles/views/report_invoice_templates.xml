@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- A separate action renders current data without reusing the issued PDF. -->
+    <template id="mahaz_report_invoice_fresh" name="Mahaz Invoice Fresh Print">
+        <t t-call="account.report_invoice_with_payments" />
+    </template>
+
+    <record id="mahaz_action_report_invoice_fresh" model="ir.actions.report">
+        <field name="name">Mahaz Invoice (Fresh Print)</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mahaz_custom_invoice_doodles.mahaz_report_invoice_fresh</field>
+        <field name="report_file">mahaz_custom_invoice_doodles.mahaz_report_invoice_fresh</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
+    </record>
+
     <template id="mahaz_invoice_doodle_block" name="Mahaz Invoice Doodle">
         <div
             t-if="o.move_type in ('out_invoice', 'out_refund') and o.doodle_image"
