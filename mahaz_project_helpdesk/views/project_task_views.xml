@@ -13,6 +13,11 @@
         <field name="mahaz_ticket_count" widget="statinfo" string="Tickets"/>
       </button>
       </xpath>
+      <xpath expr="/form/header" position="inside">
+        <field name="mahaz_can_create_ticket" invisible="1" groups="base.group_user"/>
+        <button name="mahaz_action_create_ticket" type="object" string="Create Ticket"
+                invisible="not id or not mahaz_can_create_ticket" groups="base.group_user"/>
+      </xpath>
     </field>
   </record>
 </odoo>

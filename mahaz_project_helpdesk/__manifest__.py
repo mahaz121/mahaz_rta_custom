@@ -1,5 +1,5 @@
 {'name': 'Mahaz Project Tickets',
- 'version': '18.0.1.0.1',
+ 'version': '18.0.1.0.2',
  'author': 'Mahaz',
  'license': 'AGPL-3',
  'category': 'Services/Project',

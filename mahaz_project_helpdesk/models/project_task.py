@@ -22,3 +22,6 @@ class MahazProjectTask(models.Model):
 
     def mahaz_action_view_tickets(self):
         return self._mahaz_action("helpdesk.ticket", _("Tickets"))
+
+    def mahaz_action_create_ticket(self):
+        return self._mahaz_action("helpdesk.ticket", _("Create Ticket"), create=True)
