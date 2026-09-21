@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+mahaz_access_move_doodle_readonly,mahaz.account.move.doodle.readonly,account.model_account_move,account.group_account_readonly,1,0,0,0
+mahaz_access_move_doodle_invoice,mahaz.account.move.doodle.invoice,account.model_account_move,account.group_account_invoice,1,1,1,0

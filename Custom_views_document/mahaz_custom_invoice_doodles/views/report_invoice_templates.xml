@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mahaz_invoice_doodle_block" name="Mahaz Invoice Doodle">
+        <div
+            t-if="o.move_type in ('out_invoice', 'out_refund') and o.doodle_image"
+            class="mahaz_invoice_doodle"
+            style="clear: both; margin-top: 16px; padding: 12px;
+                   border: 1px solid #dee2e6; border-radius: 6px;
+                   page-break-inside: avoid; break-inside: avoid;"
+        >
+            <style>
+                .mahaz_invoice_doodle .mahaz_doodle_image img {
+                    display: block;
+                    max-height: 120px;
+                    max-width: 100%;
+                    width: auto;
+                    height: auto;
+                    margin: 0 auto;
+                }
+            </style>
+            <div style="font-size: 12px; color: #6c757d; margin-bottom: 8px;">
+                Invoice Doodle
+            </div>
+            <div
+                class="mahaz_doodle_image"
+                t-field="o.doodle_image"
+                t-options="{'widget': 'image'}"
+            />
+        </div>
+    </template>
+
+    <template
+        id="mahaz_report_invoice_document_doodle"
+        inherit_id="account.report_invoice_document"
+    >
+        <xpath expr="//div[@id='payment_term']" position="after">
+            <t t-call="mahaz_custom_invoice_doodles.mahaz_invoice_doodle_block" />
+        </xpath>
+    </template>
+</odoo>

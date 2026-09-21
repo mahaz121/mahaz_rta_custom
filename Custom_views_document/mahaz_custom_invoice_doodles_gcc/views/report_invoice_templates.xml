@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template
+        id="mahaz_gcc_invoice_document_doodle"
+        inherit_id="l10n_gcc_invoice.arabic_english_invoice"
+    >
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <t t-call="mahaz_custom_invoice_doodles.mahaz_invoice_doodle_block" />
+        </xpath>
+    </template>
+</odoo>
