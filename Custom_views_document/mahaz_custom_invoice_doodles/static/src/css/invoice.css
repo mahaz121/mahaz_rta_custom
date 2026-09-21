@@ -26,6 +26,7 @@
 .mahaz_brand_table, .mahaz_recipient_table { width: 100%; border: 0; }
 .mahaz_brand_table td, .mahaz_recipient_table td { border: 0 !important; vertical-align: top; }
 .mahaz_brand_table { border-bottom: 2px solid #b39360; }
+.mahaz_invoice_header { margin-bottom: 18px; page-break-inside: avoid; }
 .mahaz_logo { width: 25%; padding: 0 0 12px; }
 .mahaz_logo img { max-width: 130px; max-height: 65px; width: auto; height: auto; }
 .mahaz_company { text-align: right; padding-bottom: 12px; font-size: 11px; line-height: 1.45; }
@@ -44,6 +45,14 @@
 .mahaz_verification address { font-size: 11px; }
 .mahaz_modern_invoice h2, .mahaz_modern_invoice h3 { color: #183344; font-weight: 700; }
 .mahaz_modern_invoice .mahaz_gcc_invoice h3 { font-size: 20px; border: 0; padding: 0; margin: 6px 0 18px; }
+.mahaz_modern_invoice .mahaz_gcc_invoice h3 .row,
+.mahaz_modern_invoice .mahaz_gcc_invoice #informations .row {
+    display: table; table-layout: fixed; width: 100%; margin: 0;
+}
+.mahaz_modern_invoice .mahaz_gcc_invoice h3 .col-4,
+.mahaz_modern_invoice .mahaz_gcc_invoice #informations .col-2 {
+    display: table-cell; width: 33.333%; float: none; vertical-align: top;
+}
 .mahaz_modern_invoice #informations { padding: 12px 14px !important; margin-bottom: 18px; background: #faf7f1; border-radius: 6px; font-size: 12px; }
 .mahaz_modern_invoice #informations .row { margin: 0; }
 .mahaz_modern_invoice #informations .offset-6 { margin-left: 0 !important; }

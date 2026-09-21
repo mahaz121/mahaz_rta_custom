@@ -3,11 +3,17 @@ Mahaz Invoice Doodles
 
 Maintainer: Mahaz <mahaz_abdullah@hotmail.com> | https://mahaz.uk
 
-Version 18.0.1.2.0 adds a modern navy-and-sand invoice layout, bundled Cairo
+Version 18.0.1.2.1 provides a modern navy-and-sand invoice layout, bundled Cairo
 Arabic/Latin fonts, decorative line art, and an optional saved drawing panel.
 The standard invoice and optional GCC report use the layout. The companion
 ``mahaz_custom_invoice_doodles_gcc`` preserves the localization's invoice data,
 Saudi QR payload, simplified invoice title, and issue timestamp.
+
+The company header is part of the invoice body, so its height is not clipped
+by wkhtmltopdf's separate header margin. It appears once per invoice. Standard
+invoice downloads, PDF without Payment, and Fresh Print use the same dedicated
+paper format. Other report actions and the company-wide paper format are not
+modified. Long invoices repeat the line-table heading and PDF footer.
 
 Deployment
 ----------
@@ -33,6 +39,8 @@ contain Arabic and Latin glyphs. Its SIL Open Font License is distributed in
 ``static/src/fonts/OFL.txt``. Fonts are served locally by Odoo; there is no
 Google Fonts request at print time. The report worker must be able to reach
 Odoo's assets URL, as with all Odoo PDF report assets.
+The static instances have distinct Mahaz Cairo family/style/PostScript names
+so Qt does not collapse all weights into the same font during PDF generation.
 
 Validation
 ----------
@@ -40,8 +48,10 @@ Validation
 Before production rollout, print standard and Saudi invoices in staging,
 including a credit note, discounts, long descriptions, multiple tax groups,
 multiple pages, payment entries, and a saved drawing. Verify QR scanning and
-company details. The bundled browser design preview is not an Odoo/wkhtmltopdf
-render; actual pagination must be checked in the deployment environment.
+company details. A local wkhtmltopdf 0.12.6 fixture verified the complete logo,
+long company address, one-page body layout, and distinct embedded font weights.
+It does not run the Odoo database or QWeb engine, so actual pagination and the
+footer must also be checked in the deployment environment.
 
 Security
 --------

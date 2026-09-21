@@ -4,7 +4,7 @@
 {
     "name": "Mahaz Invoice Doodles",
     "summary": "Draw or upload doodles on customer invoices and credit notes",
-    "version": "18.0.1.2.0",
+    "version": "18.0.1.2.1",
     "category": "Accounting/Accounting",
     "author": "Mahaz",
     "website": "https://mahaz.uk",

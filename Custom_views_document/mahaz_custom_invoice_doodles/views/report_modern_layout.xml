@@ -3,23 +3,25 @@
     <template id="mahaz_modern_layout" name="Mahaz Modern Invoice Layout">
         <t t-set="company" t-value="o.company_id"/>
         <link rel="stylesheet" href="/mahaz_custom_invoice_doodles/static/src/css/invoice.css"/>
-        <div class="header mahaz_invoice_header">
-            <table class="mahaz_brand_table">
-                <tr>
-                    <td class="mahaz_logo">
-                        <span t-if="company.logo" t-field="company.logo" t-options="{'widget': 'image'}"/>
-                    </td>
-                    <td class="mahaz_company">
-                        <strong t-field="company.name"/>
-                        <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': True}"/>
-                        <div t-if="company.vat">VAT / <span dir="rtl">الرقم الضريبي</span>: <span t-out="forced_vat or company.vat"/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <t t-if="custom_header_sa" t-out="custom_header_sa"/>
-        </div>
         <div class="article mahaz_modern_invoice" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id" t-att-data-oe-lang="o.env.context.get('lang')">
+            <!-- Keep the brand inside the body: wkhtmltopdf crops separate headers
+             when their height exceeds the selected report's top margin. -->
+            <div class="mahaz_invoice_header">
+                <table class="mahaz_brand_table">
+                    <tr>
+                        <td class="mahaz_logo">
+                            <span t-if="company.logo" t-field="company.logo" t-options="{'widget': 'image'}"/>
+                        </td>
+                        <td class="mahaz_company">
+                            <strong t-field="company.name"/>
+                            <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': True}"/>
+                            <div t-if="company.vat">VAT / <span dir="rtl">الرقم الضريبي</span>: <span t-out="forced_vat or company.vat"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <t t-if="custom_header_sa" t-out="custom_header_sa"/>
+            </div>
             <table class="mahaz_recipient_table">
                 <tr>
                     <td class="mahaz_customer_card">
@@ -58,15 +60,22 @@
         <field name="name">Mahaz Modern Invoice A4</field>
         <field name="format">A4</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">38</field>
+        <field name="margin_top">12</field>
         <field name="margin_bottom">24</field>
         <field name="margin_left">14</field>
         <field name="margin_right">14</field>
-        <field name="header_spacing">6</field>
+        <field name="header_spacing">0</field>
         <field name="dpi">90</field>
     </record>
     <record id="mahaz_action_report_invoice_fresh" model="ir.actions.report">
         <field name="name">Mahaz Modern Invoice (Fresh Print)</field>
+        <field name="paperformat_id" ref="mahaz_modern_paperformat"/>
+    </record>
+    <!-- Downloads and fresh prints must use the same page geometry. -->
+    <record id="account.account_invoices" model="ir.actions.report">
+        <field name="paperformat_id" ref="mahaz_modern_paperformat"/>
+    </record>
+    <record id="account.account_invoices_without_payment" model="ir.actions.report">
         <field name="paperformat_id" ref="mahaz_modern_paperformat"/>
     </record>
     <template id="mahaz_standard_modern_layout" inherit_id="account.report_invoice_document" priority="95">
