@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="mahaz_modern_layout" name="Mahaz Modern Invoice Layout">
+        <t t-set="company" t-value="o.company_id"/>
+        <link rel="stylesheet" href="/mahaz_custom_invoice_doodles/static/src/css/invoice.css"/>
+        <div class="header mahaz_invoice_header">
+            <table class="mahaz_brand_table">
+                <tr>
+                    <td class="mahaz_logo">
+                        <span t-if="company.logo" t-field="company.logo" t-options="{'widget': 'image'}"/>
+                    </td>
+                    <td class="mahaz_company">
+                        <strong t-field="company.name"/>
+                        <div t-field="company.partner_id" t-options="{'widget': 'contact', 'fields': ['address'], 'no_marker': True}"/>
+                        <div t-if="company.vat">VAT / <span dir="rtl">الرقم الضريبي</span>: <span t-out="forced_vat or company.vat"/>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <t t-if="custom_header_sa" t-out="custom_header_sa"/>
+        </div>
+        <div class="article mahaz_modern_invoice" t-att-data-oe-model="o._name" t-att-data-oe-id="o.id" t-att-data-oe-lang="o.env.context.get('lang')">
+            <table class="mahaz_recipient_table">
+                <tr>
+                    <td class="mahaz_customer_card">
+                        <div class="mahaz_eyebrow">BILL TO / <span dir="rtl">فاتورة إلى</span>
+                        </div>
+                        <div class="mahaz_customer_address" t-out="address"/>
+                    </td>
+                    <td class="mahaz_verification">
+                        <t t-if="information_block" t-out="information_block"/>
+                    </td>
+                </tr>
+            </table>
+            <t t-out="0"/>
+            <div class="mahaz_closing">
+                <img src="/mahaz_custom_invoice_doodles/static/src/img/doodles.svg" alt=""/>
+                <span>Thank you for your business.</span>
+                <span dir="rtl">شكراً لتعاملكم معنا</span>
+            </div>
+        </div>
+        <div class="footer mahaz_invoice_footer">
+            <div class="mahaz_footer_rule"/>
+            <span t-if="company.email" t-field="company.email"/>
+            <span t-if="company.phone"> · <span t-field="company.phone"/>
+            </span>
+            <span t-if="company.website"> · <span t-field="company.website"/>
+            </span>
+            <div t-if="company.report_footer" t-field="company.report_footer"/>
+            <div>
+                <span t-if="additional_footer_text" t-out="additional_footer_text"/>
+                <span class="mahaz_page_number">Page <span class="page"/> / <span class="topage"/>
+                </span>
+            </div>
+        </div>
+    </template>
+    <record id="mahaz_modern_paperformat" model="report.paperformat">
+        <field name="name">Mahaz Modern Invoice A4</field>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">38</field>
+        <field name="margin_bottom">24</field>
+        <field name="margin_left">14</field>
+        <field name="margin_right">14</field>
+        <field name="header_spacing">6</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="mahaz_action_report_invoice_fresh" model="ir.actions.report">
+        <field name="name">Mahaz Modern Invoice (Fresh Print)</field>
+        <field name="paperformat_id" ref="mahaz_modern_paperformat"/>
+    </record>
+    <template id="mahaz_standard_modern_layout" inherit_id="account.report_invoice_document" priority="95">
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">mahaz_custom_invoice_doodles.mahaz_modern_layout</attribute>
+        </xpath>
+    </template>
+</odoo>

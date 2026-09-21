@@ -1,126 +1,98 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <odoo>
-    <template
-        id="mahaz_gcc_invoice_document_doodle"
-        inherit_id="l10n_gcc_invoice.arabic_english_invoice"
-        priority="90"
-    >
+    <template id="mahaz_gcc_invoice_document_doodle" inherit_id="l10n_gcc_invoice.arabic_english_invoice" priority="90">
         <xpath expr="//div[hasclass('page')]" position="attributes">
-            <attribute name="class" add="mahaz_gcc_invoice" separator=" " />
+            <attribute name="class" add="mahaz_gcc_invoice" separator=" "/>
         </xpath>
         <xpath expr="//div[hasclass('page')]" position="inside">
-            <style>
-                .mahaz_gcc_invoice {
-                    font-size: 12px;
-                    line-height: 1.4;
-                    color: #243247;
-                }
-                .mahaz_gcc_invoice h3 {
-                    font-size: 19px;
-                    margin: 8px 0 14px;
-                    padding-bottom: 10px;
-                    border-bottom: 2px solid #b39455;
-                }
-                .mahaz_gcc_invoice table[name="invoice_line_table"] {
-                    width: 100%;
-                    table-layout: auto;
-                    margin-bottom: 10px;
-                }
-                .mahaz_gcc_invoice table[name="invoice_line_table"] thead {
-                    display: table-header-group;
-                }
-                .mahaz_gcc_invoice table[name="invoice_line_table"] tr {
-                    font-size: 11px !important;
-                    page-break-inside: avoid;
-                }
-                .mahaz_gcc_invoice table[name="invoice_line_table"] th {
-                    background: #f0f3f7;
-                    color: #243247;
-                    padding: 8px 5px;
-                    vertical-align: middle;
-                    border-color: #d8dee7;
-                }
-                .mahaz_gcc_invoice table[name="invoice_line_table"] td {
-                    padding: 8px 5px;
-                    vertical-align: top;
-                    border-color: #d8dee7;
-                }
-                .mahaz_gcc_invoice #total {
-                    display: block;
-                    margin: 0 !important;
-                }
-                .mahaz_gcc_invoice #total > div {
-                    width: 100%;
-                    max-width: 100%;
-                    padding: 0;
-                    float: none;
-                }
-                .mahaz_gcc_invoice .o_total_table {
-                    width: 100%;
-                    margin: 0 0 12px;
-                    page-break-inside: avoid;
-                }
-                .mahaz_gcc_invoice .o_total_table tr {
-                    font-size: 12px !important;
-                }
-                .mahaz_gcc_invoice .o_total_table td {
-                    padding: 7px 10px;
-                    vertical-align: middle;
-                    border-color: #d8dee7;
-                }
-                .mahaz_gcc_invoice .o_total_table td:first-child {
-                    width: 30%;
-                    white-space: nowrap;
-                    direction: ltr;
-                }
-                .mahaz_gcc_invoice .o_total_table .o_total td {
-                    background: #eef2f6;
-                    color: #243247;
-                }
-                .mahaz_gcc_invoice .mahaz_payment_date {
-                    display: inline-block;
-                    white-space: nowrap;
-                    direction: ltr;
-                    margin-right: 8px;
-                }
-                .mahaz_gcc_invoice div[name="payment_communication"] {
-                    display: block;
-                    margin: 8px 0;
-                }
-                .mahaz_gcc_invoice div[name="payment_communication"] > div {
-                    display: inline-block;
-                    width: auto;
-                    max-width: none;
-                    padding: 0 12px 0 0;
-                    vertical-align: top;
-                }
-            </style>
-            <t t-call="mahaz_custom_invoice_doodles.mahaz_invoice_doodle_block" />
+            <t t-call="mahaz_custom_invoice_doodles.mahaz_invoice_doodle_block"/>
         </xpath>
         <!-- Keep amounts in the same column as subtotal and total. -->
         <xpath expr="//t[@t-foreach='payments_vals']/tr" position="replace">
             <tr class="mahaz_payment_row">
                 <td class="text-end">
-                    <span
-                        t-out="payment_vals['amount']"
-                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                    />
+                    <span t-out="payment_vals['amount']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                 </td>
                 <td class="text-end">
-                    <span class="mahaz_payment_date" t-out="payment_vals['date']" />
-                    <span>Paid on / <span dir="rtl">دفعت في</span></span>
+                    <span class="mahaz_payment_date" t-out="payment_vals['date']"/>
+                    <span>Paid on / <span dir="rtl">دفعت في</span>
+                    </span>
                 </td>
             </tr>
         </xpath>
         <xpath expr="//tr[td/span[@t-field='o.amount_residual']]" position="replace">
             <tr class="border-top mahaz_amount_due">
                 <td class="text-end">
-                    <span t-field="o.amount_residual" />
+                    <span t-field="o.amount_residual"/>
                 </td>
                 <td class="text-end">
-                    <strong>Amount Due / <span dir="rtl">المبلغ المستحق</span></strong>
+                    <strong>Amount Due / <span dir="rtl">المبلغ المستحق</span>
+                    </strong>
                 </td>
             </tr>
+        </xpath>
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute name="t-call">mahaz_custom_invoice_doodles.mahaz_modern_layout</attribute>
+        </xpath>
+        <xpath expr="//th[@name='th_total']" position="replace">
+            <th name="th_total" class="text-end">
+                <span dir="rtl">الإجمالي شامل الضريبة</span>
+                <br/>
+                <span>Total incl. VAT</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_tax_amount']" position="replace">
+            <th name="th_tax_amount" class="text-end">
+                <span dir="rtl">قيمة الضريبة</span>
+                <br/>
+                <span>VAT amount</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_subtotal']" position="replace">
+            <th name="th_subtotal" class="text-end">
+                <span dir="rtl">قبل الضريبة</span>
+                <br/>
+                <span>Excl. VAT</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+            <th name="th_taxes" class="text-end">
+                <span dir="rtl">الضريبة</span>
+                <br/>
+                <span>Tax</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_priceunit']" position="replace">
+            <th name="th_priceunit" class="text-end">
+                <span dir="rtl">سعر الوحدة</span>
+                <br/>
+                <span>Unit price</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_quantity']" position="replace">
+            <th name="th_quantity" class="text-end">
+                <span dir="rtl">الكمية</span>
+                <br/>
+                <span>Qty</span>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_description']" position="replace">
+            <th name="th_description" class="text-end">
+                <span dir="rtl">الوصف</span>
+                <br/>
+                <span>Description</span>
+            </th>
+        </xpath>
+        <xpath expr="//tr[hasclass('o_subtotal')]/td[2]" position="replace">
+            <td class="text-end">
+                <span>Taxable amount (excl. VAT)</span><br/>
+                <span dir="rtl">المبلغ الخاضع للضريبة قبل الضريبة</span>
+            </td>
+        </xpath>
+        <xpath expr="//tr[hasclass('o_total')]/td[2]" position="replace">
+            <td class="text-end">
+                <strong>Total incl. VAT / <span dir="rtl">الإجمالي شامل الضريبة</span></strong>
+            </td>
         </xpath>
     </template>
 </odoo>

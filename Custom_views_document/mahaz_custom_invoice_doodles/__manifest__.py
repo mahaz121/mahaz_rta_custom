@@ -4,7 +4,7 @@
 {
     "name": "Mahaz Invoice Doodles",
     "summary": "Draw or upload doodles on customer invoices and credit notes",
-    "version": "18.0.1.1.0",
+    "version": "18.0.1.2.0",
     "category": "Accounting/Accounting",
     "author": "Mahaz",
     "website": "https://mahaz.uk",
@@ -14,7 +14,13 @@
         "security/ir.model.access.csv",
         "views/account_move_views.xml",
         "views/report_invoice_templates.xml",
+        "views/report_modern_layout.xml",
     ],
+    "assets": {
+        "web.report_assets_common": [
+            "mahaz_custom_invoice_doodles/static/src/css/invoice.css",
+        ],
+    },
     "installable": True,
     "application": False,
 }

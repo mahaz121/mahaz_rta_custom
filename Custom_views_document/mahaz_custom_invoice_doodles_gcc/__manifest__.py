@@ -4,7 +4,7 @@
 {
     "name": "Mahaz Invoice Doodles - GCC",
     "summary": "Show Mahaz invoice doodles on GCC Arabic/English invoices",
-    "version": "18.0.1.1.0",
+    "version": "18.0.1.2.0",
     "category": "Accounting/Localizations",
     "author": "Mahaz",
     "website": "https://mahaz.uk",
